@@ -5,7 +5,7 @@ pagination:
   enabled: true
   collection: posts
   permalink: /page/:num/
-  per_page: 5
+  per_page: 100
   sort_field: date
   sort_reverse: true
   trail:
@@ -96,7 +96,9 @@ pagination:
 
   <ul class="post-list">
     {% for post in paginator.posts %}
-
+      {% if post.hide == true %}
+      {% continue; %}
+      {% endif %}
     {% if post.external_source == blank %}
       {% assign read_time = post.content | number_of_words | divided_by: 180 | plus: 1 %}
     {% else %}
